@@ -1,12 +1,11 @@
-﻿using ILeoConsole;
+﻿using System.IO;
+using ILeoConsole;
 using ILeoConsole.Plugin;
 using ILeoConsole.Core;
 
-// make sure the namespace is consistent over all files (don't forget the .csproj file!)
-namespace LeoConsole_PluginTemplate
+namespace LeoConsole_externalScripts
 {
 
-  // ----- data from running LeoConsole instance -----
   public class ConsoleData : IData
   {
     public static User _User;
@@ -17,13 +16,10 @@ namespace LeoConsole_PluginTemplate
     public string DownloadPath { get { return _DownloadPath; } set { _DownloadPath = value; } }
   }
   
-  // ----- main plugin class -----
-  // TODO: change this to your plugin name
-  public class PluginTemplate : IPlugin
+  public class ExternalScripts : IPlugin
   {
-    // TODO: change this to your plugin name and description
-    public string Name { get { return "plugin template"; } }
-    public string Explanation { get { return "a template to create LeoConsole plugins more quickly"; } }
+    public string Name { get { return "external-scripts"; } }
+    public string Explanation { get { return "run external scripts or programs"; } }
     
     private IData _data;
     public IData data { get { return _data; } set { _data = value; } }
@@ -33,13 +29,19 @@ namespace LeoConsole_PluginTemplate
     
     public void PluginMain()
     {
-      // --- get data from LeoConsole ---
       _data = new ConsoleData();
       
-      // --- register commands ---
       _Commands = new List<ICommand>();
-      // TODO: change this to your plugin name (same as in command.cs)
-      _Commands.Add(new PluginTemplate());
+      _Commands.Add(new Script());
+
+      if (!Directory.Exists(Path.Join(_data.SavePath, "scripts"))) {
+        Console.WriteLine("creating scripts directory...");
+        try {
+          Directory.CreateDirectory(Path.Join(data.SavePath, "scripts"));
+        } catch (Exception e) {
+          Console.WriteLine("WARNING: cannot create scripts dir: " + e.Message);
+        }
+      }
     }
   }
 }
