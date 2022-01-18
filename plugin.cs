@@ -33,11 +33,12 @@ namespace LeoConsole_externalScripts
       
       _Commands = new List<ICommand>();
       _Commands.Add(new Script());
+      _Commands.Add(new ListScripts());
 
       if (!Directory.Exists(Path.Join(_data.SavePath, "scripts"))) {
         Console.WriteLine("creating scripts directory...");
         try {
-          Directory.CreateDirectory(Path.Join(data.SavePath, "scripts"));
+          Directory.CreateDirectory(Path.Join(_data.SavePath, "scripts"));
         } catch (Exception e) {
           Console.WriteLine("WARNING: cannot create scripts dir: " + e.Message);
         }
@@ -46,6 +47,4 @@ namespace LeoConsole_externalScripts
   }
 }
 
-// this tells vim to use 2 spaces instead of tabs, otherwise it's too wide for my taste, but you can adjust it to your needs
-// if you don' use vim, ignore this, but VIM rules XD
 // vim: tabstop=2 softtabstop=2 shiftwidth=2 expandtab
