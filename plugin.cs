@@ -34,7 +34,9 @@ namespace LeoConsole_externalScripts
       _Commands = new List<ICommand>();
       _Commands.Add(new Script());
       _Commands.Add(new ListScripts());
+      _Commands.Add(new Exec());
 
+      // TODO SavePath is not set yet, see https://github.com/BoettcherDasOriginal/LeoConsole/issues/12
       if (!Directory.Exists(Path.Join(_data.SavePath, "scripts"))) {
         Console.WriteLine("creating scripts directory...");
         try {
