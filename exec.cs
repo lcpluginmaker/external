@@ -4,10 +4,8 @@ using ILeoConsole;
 using ILeoConsole.Plugin;
 using ILeoConsole.Core;
 
-namespace LeoConsole_externalScripts
-{
-  public class Exec : ICommand
-  {
+namespace LeoConsole_externalScripts {
+  public class Exec : ICommand {
     public string Name { get { return "exec"; } }
     public string Description { get { return "execute arbitrary command or program"; } }
     public Action CommandFunktion { get { return () => Command(); } }
@@ -15,8 +13,7 @@ namespace LeoConsole_externalScripts
     public string[] InputProperties { get { return _InputProperties; } set { _InputProperties = value; } }
     public IData data = new ConsoleData();
 
-    public void Command()
-    {
+    public void Command() {
       if (_InputProperties.Length < 2){
         Console.WriteLine("you need to provide the command to run");
         return;
