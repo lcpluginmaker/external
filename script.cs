@@ -19,9 +19,14 @@ namespace LeoConsole_externalScripts {
         return;
       }
       Console.WriteLine("running " + _InputProperties[1] + "...");
+      string args = "";
+      for (int i = 1; i < _InputProperties.Length; i++) {
+        args = args + " " + _InputProperties[i];
+      }
+
       if (!runProcess(
             Path.Join(data.SavePath, "scripts", _InputProperties[1]),
-            "",
+            $"{data.User.name} {data.SavePath} {data.DownloadPath} {args}",
             data.SavePath)
           ) {
         Console.WriteLine("error running " + _InputProperties[1]);
@@ -35,20 +40,7 @@ namespace LeoConsole_externalScripts {
         p.StartInfo.FileName = name;
         p.StartInfo.Arguments = args;
         p.StartInfo.WorkingDirectory = pwd;
-        p.StartInfo.RedirectStandardInput = true;
         p.Start();
-
-        // send all the information to the script via stdin
-        StreamWriter dataWriter = p.StandardInput;
-        dataWriter.WriteLine(data.User.name);
-        dataWriter.WriteLine(data.SavePath);
-        dataWriter.WriteLine(data.DownloadPath);
-        foreach (string arg in _InputProperties) {
-          dataWriter.Write(arg);
-          dataWriter.Write(" ");
-        }
-        dataWriter.WriteLine("");
-        dataWriter.Close();
 
         p.WaitForExit();
         if (p.ExitCode != 0) {
