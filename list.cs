@@ -4,10 +4,8 @@ using ILeoConsole;
 using ILeoConsole.Plugin;
 using ILeoConsole.Core;
 
-namespace LeoConsole_externalScripts
-{
-  public class ListScripts : ICommand
-  {
+namespace LeoConsole_externalScripts {
+  public class ListScripts : ICommand {
     public string Name { get { return "scripts-list"; } }
     public string Description { get { return "list installed scripts"; } }
     public Action CommandFunktion { get { return () => Command(); } }
@@ -15,8 +13,7 @@ namespace LeoConsole_externalScripts
     public string[] InputProperties { get { return _InputProperties; } set { _InputProperties = value; } }
     public IData data = new ConsoleData();
 
-    public void Command()
-    {
+    public void Command() {
       try {
         foreach (string filename in Directory.GetFiles(Path.Join(data.SavePath, "share", "scripts"))) {
           Console.WriteLine(Path.GetFileName(filename));

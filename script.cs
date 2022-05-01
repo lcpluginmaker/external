@@ -6,30 +6,41 @@ using ILeoConsole.Core;
 
 namespace LeoConsole_externalScripts {
   public class Script : ICommand {
-    public string Name { get { return "script"; } }
-    public string Description { get { return "run script"; } }
+    public string Name { get; set; }
+    public string Description { get { return "external script"; } }
     public Action CommandFunktion { get { return () => Command(); } }
     private string[] _InputProperties;
     public string[] InputProperties { get { return _InputProperties; } set { _InputProperties = value; } }
     public IData data = new ConsoleData();
 
+    public Script(string name) {
+      Name = name;
+    }
+
     public void Command() {
-      if (_InputProperties.Length < 2){
-        Console.WriteLine("you need to provide the script name to run");
-        return;
+      string username = data.User.name.Replace(" ", "-");
+      if (username == "") {
+        username = "-";
       }
-      Console.WriteLine("running " + _InputProperties[1] + "...");
+      string savepath = data.SavePath.Replace(" ", "-");
+      if (savepath == "") {
+        savepath = "-";
+      }
+      string dlpath = data.DownloadPath.Replace(" ", "-");
+      if (dlpath == "") {
+        dlpath = "-";
+      }
       string args = "";
       for (int i = 1; i < _InputProperties.Length; i++) {
         args = args + " " + _InputProperties[i];
       }
 
       if (!runProcess(
-            Path.Join(data.SavePath, "share", "scripts", _InputProperties[1]),
-            $"{data.User.name} {data.SavePath} {data.DownloadPath} {args}",
-            data.SavePath)
-          ) {
-        Console.WriteLine("error running " + _InputProperties[1]);
+          Path.Join(data.SavePath, "share", "scripts", Name),
+          $"{username} {savepath} {dlpath} {args}",
+          data.SavePath
+        )) {
+        Console.WriteLine("error running " + Name);
       }
     }
 
@@ -52,7 +63,6 @@ namespace LeoConsole_externalScripts {
       }
       return true;
     }
-
   }
 }
 

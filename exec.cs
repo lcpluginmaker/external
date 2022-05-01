@@ -47,7 +47,6 @@ namespace LeoConsole_externalScripts {
       }
       return true;
     }
-
   }
 }
 

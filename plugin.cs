@@ -30,14 +30,17 @@ namespace LeoConsole_externalScripts {
       _data = new ConsoleData();
       
       _Commands = new List<ICommand>();
-      _Commands.Add(new Script());
       _Commands.Add(new ListScripts());
       _Commands.Add(new Exec());
     }
     
     public void PluginMain() {
       if (!Directory.Exists(Path.Join(_data.SavePath, "share", "scripts"))) {
-        Console.WriteLine("warning: scripts directory does not exist!");
+        Console.WriteLine("error: scripts folder does not exist!");
+        return;
+      }
+      foreach (string s in Directory.GetFiles(Path.Join(_data.SavePath, "share", "scripts"))) {
+        _Commands.Add(new Script(Path.GetFileName(s)));
       }
     }
 
