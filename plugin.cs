@@ -12,6 +12,8 @@ namespace LeoConsole_externalScripts {
     public string SavePath { get { return _SavePath; } set { _SavePath = value; } }
     public static string _DownloadPath;
     public string DownloadPath { get { return _DownloadPath; } set { _DownloadPath = value; } }
+    public static string _Version;
+    public string Version { get { return _Version; } set { _Version = value; } }
   }
   
   public class ExternalScripts : IPlugin {
@@ -23,24 +25,23 @@ namespace LeoConsole_externalScripts {
     
     private List<ICommand> _Commands;
     public List<ICommand> Commands { get { return _Commands; } set { _Commands = value; } }
-    
-    public void PluginMain() {
+
+    public void PluginInit() {
       _data = new ConsoleData();
       
       _Commands = new List<ICommand>();
       _Commands.Add(new Script());
       _Commands.Add(new ListScripts());
       _Commands.Add(new Exec());
+    }
+    
+    public void PluginMain() {
+      if (!Directory.Exists(Path.Join(_data.SavePath, "share", "scripts"))) {
+        Console.WriteLine("warning: scripts directory does not exist!");
+      }
+    }
 
-      // TODO SavePath is not set yet, see https://github.com/BoettcherDasOriginal/LeoConsole/issues/12
-      //if (!Directory.Exists(Path.Join(_data.SavePath, "scripts"))) {
-      //  Console.WriteLine("creating scripts directory...");
-      //  try {
-      //    Directory.CreateDirectory(Path.Join(_data.SavePath, "scripts"));
-      //  } catch (Exception e) {
-      //    Console.WriteLine("WARNING: cannot create scripts dir: " + e.Message);
-      //  }
-      //}
+    public void PluginShutdown() {
     }
   }
 }
