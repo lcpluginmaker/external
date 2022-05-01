@@ -31,7 +31,7 @@ It adds following commands to your console:
 ### `script <name>`
 
 Runs a script. It can be a Shell, Python, ... script or even a binary. Every
-executable in `$SAVEPATH/script` is considered a script. Following arguments
+executable in `$SAVEPATH/share/scripts` is considered a script. Following arguments
 are passed to the script (args are arguments you passed inside LeoConsole):
 
 ```text
@@ -40,7 +40,7 @@ username savepath downloadpath args...
 
 ### `scripts-list`
 
-Lists all scripts (executables) from `$SAVEPATH/scripts`.
+Lists all scripts (executables) from `$SAVEPATH/share/scripts`.
 
 ### `exec`
 
