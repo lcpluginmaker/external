@@ -18,7 +18,7 @@ namespace LeoConsole_externalScripts
     public void Command()
     {
       try {
-        foreach (string filename in Directory.GetFiles(Path.Join(data.SavePath, "scripts"))) {
+        foreach (string filename in Directory.GetFiles(Path.Join(data.SavePath, "share", "scripts"))) {
           Console.WriteLine(Path.GetFileName(filename));
         }
       } catch (Exception e) {

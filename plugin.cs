@@ -3,11 +3,9 @@ using ILeoConsole;
 using ILeoConsole.Plugin;
 using ILeoConsole.Core;
 
-namespace LeoConsole_externalScripts
-{
+namespace LeoConsole_externalScripts {
 
-  public class ConsoleData : IData
-  {
+  public class ConsoleData : IData {
     public static User _User;
     public User User { get { return _User; } set { _User = value; } }
     public static string _SavePath;
@@ -16,8 +14,7 @@ namespace LeoConsole_externalScripts
     public string DownloadPath { get { return _DownloadPath; } set { _DownloadPath = value; } }
   }
   
-  public class ExternalScripts : IPlugin
-  {
+  public class ExternalScripts : IPlugin {
     public string Name { get { return "external-scripts"; } }
     public string Explanation { get { return "run external scripts or programs"; } }
     
@@ -27,8 +24,7 @@ namespace LeoConsole_externalScripts
     private List<ICommand> _Commands;
     public List<ICommand> Commands { get { return _Commands; } set { _Commands = value; } }
     
-    public void PluginMain()
-    {
+    public void PluginMain() {
       _data = new ConsoleData();
       
       _Commands = new List<ICommand>();
@@ -37,14 +33,14 @@ namespace LeoConsole_externalScripts
       _Commands.Add(new Exec());
 
       // TODO SavePath is not set yet, see https://github.com/BoettcherDasOriginal/LeoConsole/issues/12
-      if (!Directory.Exists(Path.Join(_data.SavePath, "scripts"))) {
-        Console.WriteLine("creating scripts directory...");
-        try {
-          Directory.CreateDirectory(Path.Join(_data.SavePath, "scripts"));
-        } catch (Exception e) {
-          Console.WriteLine("WARNING: cannot create scripts dir: " + e.Message);
-        }
-      }
+      //if (!Directory.Exists(Path.Join(_data.SavePath, "scripts"))) {
+      //  Console.WriteLine("creating scripts directory...");
+      //  try {
+      //    Directory.CreateDirectory(Path.Join(_data.SavePath, "scripts"));
+      //  } catch (Exception e) {
+      //    Console.WriteLine("WARNING: cannot create scripts dir: " + e.Message);
+      //  }
+      //}
     }
   }
 }

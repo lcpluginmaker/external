@@ -25,7 +25,7 @@ namespace LeoConsole_externalScripts {
       }
 
       if (!runProcess(
-            Path.Join(data.SavePath, "scripts", _InputProperties[1]),
+            Path.Join(data.SavePath, "share", "scripts", _InputProperties[1]),
             $"{data.User.name} {data.SavePath} {data.DownloadPath} {args}",
             data.SavePath)
           ) {

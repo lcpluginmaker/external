@@ -1,0 +1,17 @@
+{
+  "manifestVersion": 2.0,
+  "packageName": "external-scripts",
+  "build": {
+    "command": "dotnet",
+    "args": ["build", "--nologo"],
+    "folder": ".",
+    "dlls": ["external-scripts.dll"],
+    "share": "./share"
+  },
+  "project": {
+    "maintainer": "alexcoder04",
+    "email": "alexcoder04@protonmail.com",
+    "homepage": "https://github.com/alexcoder04/LeoConsole-apkg",
+    "bugTracker": "https://github.com/alexcoder04/LeoConsole-apkg/issues"
+  }
+}
