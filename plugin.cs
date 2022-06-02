@@ -14,6 +14,8 @@ namespace LeoConsole_externalScripts {
     public string DownloadPath { get { return _DownloadPath; } set { _DownloadPath = value; } }
     public static string _Version;
     public string Version { get { return _Version; } set { _Version = value; } }
+    public static string _CurrentWorkingPath;
+    public string CurrentWorkingPath { get { return _CurrentWorkingPath; } set { _CurrentWorkingPath = value; } }
   }
   
   public class ExternalScripts : IPlugin {
@@ -28,13 +30,13 @@ namespace LeoConsole_externalScripts {
 
     public void PluginInit() {
       _data = new ConsoleData();
-      
       _Commands = new List<ICommand>();
+    }
+
+    public void RegisterCommands() {
       _Commands.Add(new ListScripts());
       _Commands.Add(new Exec());
-    }
-    
-    public void PluginMain() {
+
       if (!Directory.Exists(Path.Join(_data.SavePath, "share", "scripts"))) {
         Console.WriteLine("error: scripts folder does not exist!");
         return;
@@ -42,6 +44,9 @@ namespace LeoConsole_externalScripts {
       foreach (string s in Directory.GetFiles(Path.Join(_data.SavePath, "share", "scripts"))) {
         _Commands.Add(new Script(Path.GetFileName(s)));
       }
+    }
+    
+    public void PluginMain() {
     }
 
     public void PluginShutdown() {
