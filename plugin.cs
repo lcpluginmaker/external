@@ -41,6 +41,7 @@ namespace LeoConsole_externalScripts {
         Console.WriteLine("error: scripts folder does not exist!");
         return;
       }
+
       foreach (string s in Directory.GetFiles(Path.Join(_data.SavePath, "share", "scripts"))) {
         _Commands.Add(new Script(Path.GetFileName(s)));
       }

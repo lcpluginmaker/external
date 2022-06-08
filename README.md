@@ -6,22 +6,10 @@ This plugin enables you to run own scripts or external programs from the
 
 ## Installation
 
-### Default (with `pkg`)
-
-In LeoConsole, type
+External-scripts is in the main repository. Just type
 
 ```
-pkg update
-pkg get external-scripts
-```
-
-### Bleeding-edge (from git)
-
-In LeoConsole, type
-
-```
-apkg update
-apkg get https://github.com/alexcoder04/LeoConsole-external-scripts.git
+apkg get external-scripts
 ```
 
 ## Usage
