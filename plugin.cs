@@ -1,5 +1,4 @@
-﻿using System.IO;
-using ILeoConsole;
+﻿using ILeoConsole;
 using ILeoConsole.Plugin;
 using ILeoConsole.Core;
 
@@ -47,11 +46,8 @@ namespace LeoConsole_externalScripts {
       }
     }
     
-    public void PluginMain() {
-    }
-
-    public void PluginShutdown() {
-    }
+    public void PluginMain() { }
+    public void PluginShutdown() { }
   }
 }
 

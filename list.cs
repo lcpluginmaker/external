@@ -1,7 +1,4 @@
-using System.IO;
-using System.Diagnostics;
 using ILeoConsole;
-using ILeoConsole.Plugin;
 using ILeoConsole.Core;
 
 namespace LeoConsole_externalScripts {

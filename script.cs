@@ -1,8 +1,7 @@
-using System.IO;
-using System.Diagnostics;
-using ILeoConsole;
-using ILeoConsole.Plugin;
 using ILeoConsole.Core;
+using ILeoConsole;
+using System.Diagnostics;
+using System.Text.Json;
 
 namespace LeoConsole_externalScripts {
   public class Script : ICommand {
@@ -18,18 +17,15 @@ namespace LeoConsole_externalScripts {
     }
 
     public void Command() {
-      string username = data.User.name.Replace(" ", "-");
-      if (username == "") {
-        username = "-";
-      }
-      string savepath = data.SavePath.Replace(" ", "-");
-      if (savepath == "") {
-        savepath = "-";
-      }
-      string dlpath = data.DownloadPath.Replace(" ", "-");
-      if (dlpath == "") {
-        dlpath = "-";
-      }
+      AppData d = new AppData();
+      d.Username = data.User.name;
+      d.SavePath = data.SavePath;
+      d.DownloadPath = data.DownloadPath;
+      d.Version = data.Version;
+
+      string arg = System.Convert.ToBase64String(
+          System.Text.Encoding.UTF8.GetBytes(JsonSerializer.Serialize(d))
+          );
       string args = "";
       for (int i = 1; i < _InputProperties.Length; i++) {
         args = args + " " + _InputProperties[i];
@@ -37,7 +33,7 @@ namespace LeoConsole_externalScripts {
 
       if (!runProcess(
           Path.Join(data.SavePath, "share", "scripts", Name),
-          $"{username} {savepath} {dlpath} {args}",
+          $"{arg} {args}",
           data.SavePath
         )) {
         Console.WriteLine("error running " + Name);
