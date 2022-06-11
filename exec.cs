@@ -1,9 +1,10 @@
-using System.Diagnostics;
 using ILeoConsole;
 using ILeoConsole.Core;
 
-namespace LeoConsole_External {
-  public class Exec : ICommand {
+namespace LeoConsole_External
+{
+  public class Exec : ICommand
+  {
     public string Name { get { return "exec"; } }
     public string Description { get { return "execute arbitrary command or program"; } }
     public Action CommandFunktion { get { return () => Command(); } }
@@ -11,39 +12,26 @@ namespace LeoConsole_External {
     public string[] InputProperties { get { return _InputProperties; } set { _InputProperties = value; } }
     public IData data = new ConsoleData();
 
-    public void Command() {
-      if (_InputProperties.Length < 2){
-        Console.WriteLine("you need to provide the command to run");
+    public void Command()
+    {
+      if (_InputProperties.Length < 2)
+      {
+        Console.WriteLine("error: you need to provide the command to run");
         return;
       }
+
       string command = _InputProperties[1];
       string args = "";
-      for (int i = 2; i < _InputProperties.Length; i++) {
-        args = args + " " + _InputProperties[i];
+      for (int i = 2; i < _InputProperties.Length; i++)
+      {
+        args = $"{args} {_InputProperties[i]}";
       }
-      Console.WriteLine("executing " + command + " " + args + "...");
-      if (!runProcess(command, args, data.SavePath)) {
-        Console.WriteLine("error executing " + command);
-      }
-    }
 
-    // run a process with parameters and wait for it to finish
-    private bool runProcess(string name, string args, string pwd) {
-      try {
-        Process p = new Process();
-        p.StartInfo.FileName = name;
-        p.StartInfo.Arguments = args;
-        p.StartInfo.WorkingDirectory = pwd;
-        p.Start();
-        p.WaitForExit();
-        if (p.ExitCode != 0) {
-          return false;
-        }
-      } catch (Exception e) {
-        Console.WriteLine("error: " + e.Message);
-        return false;
+      Console.WriteLine($"executing {command} {args}...");
+      if (!Utils.RunProcess(command, args, data.SavePath))
+      {
+        Console.WriteLine($"error executing {command}");
       }
-      return true;
     }
   }
 }

@@ -3,19 +3,25 @@ using ILeoConsole;
 using System.Diagnostics;
 using System.Text.Json;
 
-namespace LeoConsole_External {
-  public class Utils {
-    // encode IData to json to base64
-    public static string EncodeData(IData data) {
+namespace LeoConsole_External
+{
+  public class Utils
+  {
+    // encode IData to json and then to base64
+    public static string EncodeData(IData data)
+    {
       AppData d = new AppData();
-      try {
-        d.Username = data.User.name;
-      } catch (System.NullReferenceException) {
-        d.Username = "";
-      }
       d.SavePath = data.SavePath;
       d.DownloadPath = data.DownloadPath;
       d.Version = data.Version;
+      try
+      {
+        d.Username = data.User.name;
+      }
+      catch (System.NullReferenceException)
+      {
+        d.Username = "";
+      }
 
       return System.Convert.ToBase64String(
           System.Text.Encoding.UTF8.GetBytes(JsonSerializer.Serialize(d))
@@ -23,8 +29,10 @@ namespace LeoConsole_External {
     }
 
     // run a process with parameters and wait for it to finish
-    public static bool RunProcess(string name, string args, string pwd) {
-      try {
+    public static bool RunProcess(string name, string args, string pwd)
+    {
+      try
+      {
         Process p = new Process();
         p.StartInfo.FileName = name;
         p.StartInfo.Arguments = args;
@@ -32,10 +40,13 @@ namespace LeoConsole_External {
         p.Start();
 
         p.WaitForExit();
-        if (p.ExitCode != 0) {
+        if (p.ExitCode != 0)
+        {
           return false;
         }
-      } catch (Exception e) {
+      }
+      catch (Exception e)
+      {
         Console.WriteLine("error: " + e.Message);
         return false;
       }

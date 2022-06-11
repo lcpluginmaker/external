@@ -6,15 +6,21 @@ This plugin enables you to run own scripts or external programs from the
 
 ## Installation
 
-External-scripts is in the main repository. Just type
+External is in the main repository. Just type
 
 ```
-apkg get external-scripts
+apkg get external
 ```
 
 ## Usage
 
 This plugin adds following commands to your console:
+
+### `<plugin-name> [args...]`
+
+Runs a Go plugin. Any executable in `$SAVEPATH/share/go-plugin` is considered a
+Go plugin. Use the [gilc](https://github.com/alexcoder04/gilc) library for
+writing Go plugins.
 
 ### `<script-name> [args...]`
 
@@ -34,10 +40,6 @@ This base64 string decodes to
 ```json
 {"Username":"user01","SavePath":"/home/user01/LeoConsole/data","DownloadPath":"/home/user01/LeoConsole/data/tmp","Version":"2.0.0"}
 ```
-
-### `scripts-list`
-
-Lists all scripts (executables) from `$SAVEPATH/share/scripts`.
 
 ### `exec <program> [args...]`
 

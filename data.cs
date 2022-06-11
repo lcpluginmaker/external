@@ -1,6 +1,8 @@
 
-namespace LeoConsole_External {
-  public class AppData {
+namespace LeoConsole_External
+{
+  public class AppData
+  {
     public string Username { get; set; }
     public string SavePath { get; set; }
     public string DownloadPath { get; set; }

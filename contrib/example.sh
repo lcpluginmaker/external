@@ -2,8 +2,12 @@
 
 echo "This is an example shell script for LeoConsole"
 
+command -v base64 >/dev/null || exit 1
+command -v jq >/dev/null || exit 1
+
 data="$1"; shift
 echo "raw data: $data"
+
 decoded_data="$(echo "$data" | base64 -d)"
 echo "decoded data: $decoded_data"
 
