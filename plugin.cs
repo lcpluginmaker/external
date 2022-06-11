@@ -2,7 +2,7 @@
 using ILeoConsole.Plugin;
 using ILeoConsole.Core;
 
-namespace LeoConsole_externalScripts {
+namespace LeoConsole_External {
 
   public class ConsoleData : IData {
     public static User _User;
@@ -18,8 +18,8 @@ namespace LeoConsole_externalScripts {
   }
   
   public class ExternalScripts : IPlugin {
-    public string Name { get { return "external-scripts"; } }
-    public string Explanation { get { return "run external scripts or programs"; } }
+    public string Name { get { return "external"; } }
+    public string Explanation { get { return "run go plugins, external scripts or programs"; } }
     
     private IData _data;
     public IData data { get { return _data; } set { _data = value; } }
@@ -46,8 +46,11 @@ namespace LeoConsole_externalScripts {
       }
     }
     
-    public void PluginMain() { }
-    public void PluginShutdown() { }
+    public void PluginMain() {
+    }
+
+    public void PluginShutdown() {
+    }
   }
 }
 

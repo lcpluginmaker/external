@@ -2,7 +2,7 @@ using System.Diagnostics;
 using ILeoConsole;
 using ILeoConsole.Core;
 
-namespace LeoConsole_externalScripts {
+namespace LeoConsole_External {
   public class Exec : ICommand {
     public string Name { get { return "exec"; } }
     public string Description { get { return "execute arbitrary command or program"; } }

@@ -3,7 +3,9 @@
 echo "This is an example shell script for LeoConsole"
 
 data="$1"; shift
-decoded_data="$(echo "$data" | base64 -d | jq)"
+echo "raw data: $data"
+decoded_data="$(echo "$data" | base64 -d)"
+echo "decoded data: $decoded_data"
 
 username="$(echo "$decoded_data" | jq -r ".Username")"
 savepath="$(echo "$decoded_data" | jq -r ".SavePath")"

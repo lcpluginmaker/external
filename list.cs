@@ -1,7 +1,7 @@
 using ILeoConsole;
 using ILeoConsole.Core;
 
-namespace LeoConsole_externalScripts {
+namespace LeoConsole_External {
   public class ListScripts : ICommand {
     public string Name { get { return "scripts-list"; } }
     public string Description { get { return "list installed scripts"; } }

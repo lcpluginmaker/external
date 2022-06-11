@@ -1,12 +1,12 @@
 {
   "manifestVersion": 2.1,
-  "packageName": "external-scripts",
+  "packageName": "external",
   "packageVersion": "1.1.0",
   "build": {
     "command": "dotnet",
     "args": ["build", "--nologo"],
     "folder": ".",
-    "dlls": ["external-scripts.dll"],
+    "dlls": ["external.dll"],
     "share": "./share"
   },
   "project": {
