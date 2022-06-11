@@ -8,7 +8,11 @@ namespace LeoConsole_External {
     // encode IData to json to base64
     public static string EncodeData(IData data) {
       AppData d = new AppData();
-      d.Username = data.User.name;
+      try {
+        d.Username = data.User.name;
+      } catch (System.NullReferenceException) {
+        d.Username = "";
+      }
       d.SavePath = data.SavePath;
       d.DownloadPath = data.DownloadPath;
       d.Version = data.Version;

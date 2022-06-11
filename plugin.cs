@@ -27,9 +27,12 @@ namespace LeoConsole_External {
     private List<ICommand> _Commands;
     public List<ICommand> Commands { get { return _Commands; } set { _Commands = value; } }
 
+    private List<string> GoPlugins;
+
     public void PluginInit() {
       _data = new ConsoleData();
       _Commands = new List<ICommand>();
+      GoPlugins = new List<string>();
     }
 
     public void RegisterCommands() {
@@ -40,16 +43,40 @@ namespace LeoConsole_External {
         Console.WriteLine("error: scripts folder does not exist!");
         return;
       }
+      if (!Directory.Exists(Path.Join(_data.SavePath, "share", "go-plugin"))) {
+        Console.WriteLine("error: go plugins folder does not exist!");
+        return;
+      }
 
       foreach (string s in Directory.GetFiles(Path.Join(_data.SavePath, "share", "scripts"))) {
         _Commands.Add(new Script(Path.GetFileName(s)));
       }
+      foreach (string s in Directory.GetFiles(Path.Join(_data.SavePath, "share", "go-plugin"))) {
+        _Commands.Add(new GoPlugin(Path.GetFileName(s)));
+        GoPlugins.Add(Path.GetFileName(s));
+      }
     }
     
     public void PluginMain() {
+      RunGoPlugins("main");
     }
 
     public void PluginShutdown() {
+      RunGoPlugins("shutdown");
+    }
+
+    private void RunGoPlugins(string inducement) {
+      foreach (string gp in GoPlugins) {
+        string fullPath = Path.Join(_data.SavePath, "share", "go-plugin", gp);
+        string pwd;
+        if (string.IsNullOrEmpty(_data.CurrentWorkingPath)) {
+          pwd = _data.SavePath;
+        } else {
+          pwd = _data.CurrentWorkingPath;
+        }
+        string args = $"{inducement} {Utils.EncodeData(_data)}";
+        Utils.RunProcess(fullPath, args, pwd);
+      }
     }
   }
 }
