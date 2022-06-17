@@ -8,6 +8,7 @@ namespace LeoConsole_External
     public string Name { get { return "exec"; } }
     public string Description { get { return "execute arbitrary command or program"; } }
     public Action CommandFunktion { get { return () => Command(); } }
+    public Action HelpFunktion { get { return () => Console.WriteLine("haha"); } }
     private string[] _InputProperties;
     public string[] InputProperties { get { return _InputProperties; } set { _InputProperties = value; } }
     public IData data = new ConsoleData();

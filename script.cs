@@ -8,6 +8,7 @@ namespace LeoConsole_External
     public string Name { get; set; }
     public string Description { get { return "external script"; } }
     public Action CommandFunktion { get { return () => Command(); } }
+    public Action HelpFunktion { get { return () => Console.WriteLine("haha"); } }
     private string[] _InputProperties;
     public string[] InputProperties { get { return _InputProperties; } set { _InputProperties = value; } }
     public IData data = new ConsoleData();
