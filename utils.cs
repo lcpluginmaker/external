@@ -47,7 +47,7 @@ namespace LeoConsole_External
       }
       catch (Exception e)
       {
-        Console.WriteLine("error: " + e.Message);
+        LConsole.MessageErr0(e.Message);
         return false;
       }
       return true;

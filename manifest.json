@@ -1,7 +1,9 @@
 {
-  "manifestVersion": 2.1,
+  "manifestVersion": 3.0,
   "packageName": "external",
-  "packageVersion": "2.0.0",
+  "packageVersion": "2.2.0",
+  "depends": [],
+  "compatibleVersions": ["2.1.0"],
   "build": {
     "command": "dotnet",
     "args": ["build", "--nologo"],

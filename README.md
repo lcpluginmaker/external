@@ -43,5 +43,5 @@ This base64 string decodes to
 
 ### `exec <program> [args...]`
 
-Executes an arbitrary binary (from your `$PATH`).
+Executes an arbitrary binary (from your `$PATH`) or using an absolute path.
 

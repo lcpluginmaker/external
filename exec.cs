@@ -7,31 +7,31 @@ namespace LeoConsole_External
   {
     public string Name { get { return "exec"; } }
     public string Description { get { return "execute arbitrary command or program"; } }
-    public Action CommandFunktion { get { return () => Command(); } }
-    public Action HelpFunktion { get { return () => Console.WriteLine("haha"); } }
-    private string[] _InputProperties;
-    public string[] InputProperties { get { return _InputProperties; } set { _InputProperties = value; } }
+    public Action CommandFunction { get { return () => Command(); } }
+    public Action HelpFunction { get { return () => Console.WriteLine("not available"); } }
+    private string[] _Arguments;
+    public string[] Arguments { get { return _Arguments; } set { _Arguments = value; } }
     public IData data = new ConsoleData();
 
     public void Command()
     {
-      if (_InputProperties.Length < 2)
+      if (_Arguments.Length < 2)
       {
-        Console.WriteLine("error: you need to provide the command to run");
+        LConsole.MessageErr0("you need to provide the command to run");
         return;
       }
 
-      string command = _InputProperties[1];
+      string command = _Arguments[1];
       string args = "";
-      for (int i = 2; i < _InputProperties.Length; i++)
+      for (int i = 2; i < _Arguments.Length; i++)
       {
-        args = $"{args} {_InputProperties[i]}";
+        args = $"{args} {_Arguments[i]}";
       }
 
-      Console.WriteLine($"executing {command} {args}...");
+      LConsole.MessageSuc0($"executing {command} {args}...");
       if (!Utils.RunProcess(command, args, data.SavePath))
       {
-        Console.WriteLine($"error executing {command}");
+        LConsole.MessageErr0($"cannot execute {command}");
       }
     }
   }

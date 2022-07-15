@@ -47,12 +47,12 @@ namespace LeoConsole_External
 
       if (!Directory.Exists(scriptsFolder))
       {
-        Console.WriteLine("warning: scripts folder does not exist, creating...");
+        LConsole.MessageWarn0("warning: scripts folder does not exist, creating...");
         Directory.CreateDirectory(scriptsFolder);
       }
       if (!Directory.Exists(goPluginsFolder))
       {
-        Console.WriteLine("warning: go plugins folder does not exist, creating...");
+        LConsole.MessageWarn0("warning: go plugins folder does not exist, creating...");
         Directory.CreateDirectory(goPluginsFolder);
       }
 
