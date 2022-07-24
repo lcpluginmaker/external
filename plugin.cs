@@ -62,7 +62,7 @@ namespace LeoConsole_External
       }
       foreach (string s in Directory.GetFiles(goPluginsFolder))
       {
-        _Commands.Add(new GoPlugin(Path.GetFileName(s)));
+        _Commands.Add(new GoPlugin(Path.GetFileName(s), _data.SavePath));
         GoPlugins.Add(Path.GetFileName(s));
       }
     }

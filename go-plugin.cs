@@ -1,21 +1,29 @@
 using ILeoConsole.Core;
 using ILeoConsole;
+using System.Text.Json;
 
 namespace LeoConsole_External
 {
+  public class PluginDataJson {
+    public string Description { get; set; }
+  }
+
   public class GoPlugin : ICommand
   {
     public string Name { get; set; }
-    public string Description { get { return "go plugin"; } }
+    public string Description { get; set; }
     public Action CommandFunction { get { return () => Command(); } }
     public Action HelpFunction { get { return () => Console.WriteLine("not available"); } }
     private string[] _Arguments;
     public string[] Arguments { get { return _Arguments; } set { _Arguments = value; } }
     public IData data = new ConsoleData();
 
-    public GoPlugin(string name)
+    public GoPlugin(string name, string savePath)
     {
       Name = name;
+      Description = JsonSerializer.Deserialize<PluginDataJson>(
+          Utils.GetOutput(Path.Join(savePath, "share", "go-plugin", Name), $"init {Utils.EncodeData(data)}", savePath)
+          ).Description;
     }
 
     public void Command()
