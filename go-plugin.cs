@@ -22,7 +22,7 @@ namespace LeoConsole_External
     {
       Name = name;
       Description = JsonSerializer.Deserialize<PluginDataJson>(
-          Utils.GetOutput(Path.Join(savePath, "share", "go-plugin", Name), $"init {Utils.EncodeData(data)}", savePath)
+          Processes.CheckOutput(Path.Join(savePath, "share", "go-plugin", Name), $"init {Utils.EncodeData(data)}", savePath)
           ).Description;
     }
 
@@ -34,12 +34,12 @@ namespace LeoConsole_External
         args = $"{args} {_Arguments[i]}";
       }
 
-      bool exitSuccessful = Utils.RunProcess(
+      int exitCode = Processes.Run(
           Path.Join(data.SavePath, "share", "go-plugin", Name),
           $"command {Utils.EncodeData(data)} {args}",
           data.SavePath
           );
-      if (!exitSuccessful)
+      if (exitCode != 0)
       {
         LConsole.MessageErr0($"cannot execute {Name}");
       }

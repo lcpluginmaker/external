@@ -88,7 +88,7 @@ namespace LeoConsole_External
         } else {
           pwd = _data.CurrentWorkingPath;
         }
-        Utils.RunProcess(fullPath, $"{inducement} {Utils.EncodeData(_data)}", pwd);
+        Processes.Run(fullPath, $"{inducement} {Utils.EncodeData(_data)}", pwd);
       }
     }
   }

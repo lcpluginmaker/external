@@ -27,54 +27,6 @@ namespace LeoConsole_External
           System.Text.Encoding.UTF8.GetBytes(JsonSerializer.Serialize(d))
           );
     }
-
-    // run a process with parameters and wait for it to finish
-    public static bool RunProcess(string name, string args, string pwd)
-    {
-      try
-      {
-        Process p = new Process();
-        p.StartInfo.FileName = name;
-        p.StartInfo.Arguments = args;
-        p.StartInfo.WorkingDirectory = pwd;
-        p.Start();
-
-        p.WaitForExit();
-        if (p.ExitCode != 0)
-        {
-          return false;
-        }
-      }
-      catch (Exception e)
-      {
-        LConsole.MessageErr0(e.Message);
-        return false;
-      }
-      return true;
-    }
-
-    public static string GetOutput(string name, string args, string pwd)
-    {
-      try
-      {
-        Process p = new Process();
-        p.StartInfo.FileName = name;
-        p.StartInfo.Arguments = args;
-        p.StartInfo.WorkingDirectory = pwd;
-        p.StartInfo.RedirectStandardOutput = true;
-        p.Start();
-
-        string data = p.StandardOutput.ReadToEnd();
-        p.WaitForExit();
-        return data;
-      }
-      catch (Exception e)
-      {
-        LConsole.MessageErr0(e.Message);
-        return "";
-      }
-      return "";
-    }
   }
 }
 

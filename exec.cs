@@ -28,8 +28,8 @@ namespace LeoConsole_External
         args = $"{args} {_Arguments[i]}";
       }
 
-      LConsole.MessageSuc0($"executing {command} {args}...");
-      if (!Utils.RunProcess(command, args, data.SavePath))
+      LConsole.MessageSuc0($"executing {command}{args}...");
+      if (Processes.Run(command, args, data.SavePath) != 0)
       {
         LConsole.MessageErr0($"cannot execute {command}");
       }

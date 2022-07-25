@@ -25,12 +25,12 @@ namespace LeoConsole_External
         args = $"{args} {_Arguments[i]}";
       }
 
-      bool exitSuccessful = Utils.RunProcess(
+      int exitCode = Processes.Run(
           Path.Join(data.SavePath, "share", "scripts", Name),
           $"{Utils.EncodeData(data)} {args}",
           data.SavePath
           );
-      if (!exitSuccessful)
+      if (exitCode != 0)
       {
         LConsole.MessageErr0($"cannot execute {Name}");
       }
